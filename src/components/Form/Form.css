@@ -1,0 +1,109 @@
+.form {
+  padding: 30px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.form-title {
+  margin: 0;
+  margin-bottom: 20px;
+
+  color: #000;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.form-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 19px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.field-text {
+  padding: 0 10px;
+  width: 100%;
+
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  background-color: #ffffff;
+}
+
+.field-text::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.field-text.field-input {
+  height: 40px;
+}
+
+.field-text.field-textarea {
+  min-height: 140px;
+  width: 100%;
+  padding: 10px;
+  resize: none;
+}
+
+.field-label {
+  display: inline-block;
+  margin-bottom: 5px;
+
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.btn-file {
+  position: relative;
+
+  margin-top: 4px;
+  padding-left: 22px;
+
+  color: #0055fb;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+
+  cursor: pointer;
+}
+
+.btn-file::before {
+  position: absolute;
+  top: 3px;
+  left: 0;
+
+  width: 17px;
+  height: 15px;
+  background: url('./clip.svg') no-repeat center;
+
+  content: '';
+}
+
+.btn-send {
+  margin-top: 1px;
+  width: 140px;
+  height: 40px;
+
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+
+  border: none;
+  border-radius: 5px;
+  background-color: #c4c4c4;
+  background-image: linear-gradient(to bottom, #45a6ff 0%, #0055fb 100%);
+
+  cursor: pointer;
+}
