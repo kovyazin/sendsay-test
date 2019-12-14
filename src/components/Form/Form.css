@@ -91,6 +91,8 @@
 }
 
 .btn-send {
+  position: relative;
+
   margin-top: 1px;
   width: 140px;
   height: 40px;
@@ -105,5 +107,61 @@
   background-color: #c4c4c4;
   background-image: linear-gradient(to bottom, #45a6ff 0%, #0055fb 100%);
 
+  transition: .2s linear;
+
   cursor: pointer;
+  outline: none;
+}
+
+.btn-send::before {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+
+  display: none;
+  width: 144px;
+  height: 44px;
+
+  border: 2px solid #45a5ff;
+  border-radius: 7px;
+
+  transition: .2s linear;
+
+  opacity: 0.5;
+  content: '';
+}
+
+.btn-send::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+
+  border-radius: 5px;
+
+  transition: .2s linear;
+
+  content: '';
+}
+
+.btn-send:focus::before {
+  display: block;
+}
+
+.btn-send:hover::after {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-send:active::after {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.btn-send:disabled {
+  background-image: none;
+}
+
+.btn-send:disabled:hover::after {
+  background: none;
 }
