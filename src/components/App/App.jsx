@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 
 import Logo from '../Logo/Logo';
-import Form from '../Form/Form';
+import MessageForm from '../MessageForm/MessageForm';
 import SentMessages from '../SentMessages/SentMessages';
 
 const App = (props) => {
@@ -11,7 +11,7 @@ const App = (props) => {
     <div className="app">
       <Logo />
       <div className="app-form">
-        <Form />
+        <MessageForm />
       </div>
       <div className="app-messages">
         <SentMessages />

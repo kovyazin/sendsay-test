@@ -7,7 +7,7 @@ const SentMessages = ({ sentMessages }) => {
   return (
     <div className="sent-messages">
       <div className="sent-messages-title">Отправленные сообщения</div>
-      {!!sentMessages.length && <TableSentMessages />}
+      {!!sentMessages.length && <TableSentMessages sentMessages={sentMessages} />}
       {!sentMessages.length && <div>Сообщения ещё не отправлялись</div>}
     </div>
   )

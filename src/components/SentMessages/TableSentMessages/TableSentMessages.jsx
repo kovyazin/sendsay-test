@@ -1,7 +1,8 @@
 import React from 'react';
+import SentMessagesItem from './SentMessagesItem/SentMessagesItem';
 import './TableSentMessages.css';
 
-const TableSentMessages = (props) => {
+const TableSentMessages = ({ sentMessages }) => {
   return (
     <table className="sent-messages-table">
       <thead>
@@ -12,21 +13,18 @@ const TableSentMessages = (props) => {
         </tr>
       </thead>
       <tbody>
-        <tr className="sent-messages-row">
-          <td className="sent-messages-data">30 сентября</td>
-          <td className="sent-messages-data">Тема письма, которая не поместится в эту строку, потому ч...</td>
-          <td className="sent-messages-data color-success">Отправлено</td>
-        </tr>
-        <tr className="sent-messages-row">
-          <td className="sent-messages-data">30 сентября</td>
-          <td className="sent-messages-data">Тема письма, которая не поместится в эту строку, потому ч...</td>
-          <td className="sent-messages-data color-waiting">В очереди</td>
-        </tr>
-        <tr className="sent-messages-row">
-          <td className="sent-messages-data">30 сентября</td>
-          <td className="sent-messages-data">Тема письма, которая не поместится в эту строку, потому ч...</td>
-          <td className="sent-messages-data color-warning">Ошибка</td>
-        </tr>
+        {
+          sentMessages.map(({ id, values: { message }, result: { status = 0, date = null } = {} }) => {
+            return (
+              <SentMessagesItem
+                key={id}
+                message={message}
+                id={id}
+                status={status}
+                date={date} />
+            )
+          })
+        }
       </tbody>
     </table>
   )

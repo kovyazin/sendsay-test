@@ -41,6 +41,10 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 25px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sent-messages-data:nth-child(3) {
