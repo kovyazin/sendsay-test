@@ -19,7 +19,6 @@ class SentMessagesItemContainer extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.status !== this.props.status) {
-      debugger;
       clearInterval(this.timer);
     }
   }

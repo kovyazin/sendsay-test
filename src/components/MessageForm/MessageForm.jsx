@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, useField } from 'formik';
 import * as Yup from 'yup';
-import { sendMessage } from '../../reducers/reducer';
+import { sendMessage, showThanksgivingMessage } from '../../reducers/reducer';
 
 import './MessageForm.css';
 
@@ -34,7 +34,7 @@ const TextArea = ({ label, ...props }) => {
   )
 }
 
-const MessageForm = ({ sendMessage }) => {
+const MessageForm = ({ sendMessage, showThanksgivingMessage }) => {
   return (
     <Formik
       initialValues={{
@@ -69,6 +69,7 @@ const MessageForm = ({ sendMessage }) => {
         sendMessage(values);
         setSubmitting(false);
         resetForm();
+        showThanksgivingMessage();
       }}>
       {({ isSubmitting, handleSubmit }) => (
         <form className="form" onSubmit={handleSubmit}>
@@ -140,4 +141,4 @@ const MessageForm = ({ sendMessage }) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { sendMessage })(MessageForm);
+export default connect(mapStateToProps, { sendMessage, showThanksgivingMessage })(MessageForm);

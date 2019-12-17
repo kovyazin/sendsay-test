@@ -2,9 +2,12 @@ import { sendFormData, getMessageInfo } from '../services/api';
 
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const UPDATE_MESSAGE_STATUS = 'UPDATE_MESSAGE_STATUS';
+const SHOW_THANKSGIVING_MESSAGE = 'SHOW_THANKSGIVING_MESSAGE';
+const HIDE_THANKSGIVING_MESSAGE = 'HIDE_THANKSGIVING_MESSAGE';
 
 const initialState = {
-  sentMessages: []
+  sentMessages: [],
+  isShowThanksgivingMessage: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +41,16 @@ const reducer = (state = initialState, action) => {
           return msg;
         })
       }
+    case SHOW_THANKSGIVING_MESSAGE:
+      return {
+        ...state,
+        isShowThanksgivingMessage: true
+      }
+    case HIDE_THANKSGIVING_MESSAGE:
+      return {
+        ...state,
+        isShowThanksgivingMessage: false
+      }
     default:
       return state;
   }
@@ -56,5 +69,8 @@ export const updateMessageStatus = (id) => (dispatch) => {
     dispatch(updateMessageStatusAC(id, dt, status));
   })
 }
+
+export const showThanksgivingMessage = () => ({ type: SHOW_THANKSGIVING_MESSAGE });
+export const hideThanksgivingMessage = () => ({ type: HIDE_THANKSGIVING_MESSAGE });
 
 export default reducer;

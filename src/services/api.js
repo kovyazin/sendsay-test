@@ -19,14 +19,6 @@ const transformData = ({ subject, fromName, fromEmail, toName, message, mca }) =
   }
 }
 
-// export const sendDataForm = (data) => {
-//   return sendsay.request(transformData(data))
-//     .then((res) => res['track.id'])
-//     .then((id) => sendsay.request({ action: 'track.get', id}))
-//     .then(({ obj }) => obj)
-//     .catch((err) => err);
-// }
-
 export const sendFormData = (data) => {
   return sendsay.request(transformData(data))
     .then((res) => res)
@@ -36,10 +28,5 @@ export const sendFormData = (data) => {
 export const getMessageInfo = (id) => {
   return sendsay.request({ action: 'track.get', id })
     .then((res) => res)
-    .then((err) => err)
+    .catch((err) => err)
 }
-
-// export const getMessageInfo = (id) => {
-//   return sendsay.request({ action: 'track.get', id})
-//     .then(({ obj }) => obj)
-// }
