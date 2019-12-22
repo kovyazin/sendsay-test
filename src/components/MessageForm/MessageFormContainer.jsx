@@ -1,5 +1,5 @@
 /* Import libraries */
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -9,9 +9,7 @@ import { showThanksgivingMessage } from '../../actionCreators/thanksgivingMessag
 
 /* Import components */
 import MessageForm from './MessageForm';
-
-/* Import services */
-import toBase64 from '../../services/toBase64';
+import { Formik } from "formik";
 
 const validationSchema = Yup.object({
   fromName: Yup.string().required('Имя не может быть пустым'),
@@ -33,50 +31,37 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  subject: '',
   fromName: '',
   fromEmail: '',
   toName: '',
+  toEmail: '',
+  subject: '',
   message: '',
-  mca: '',
   attaches: []
 };
 
-const MessageFormContainer = props => {
-  const [fileLoadingError, setFileLoadingError] = useState(null);
-
-  const handleUploadFile = async (files, attaches, setFieldValue) => {
-    const content = await toBase64(files[0]).catch(e => e);
-    if (content instanceof Error) {
-      setFileLoadingError({ hasError: true, errorMessage: content.message });
-      return;
-    }
-
-    setFieldValue('attaches', [
-      ...attaches,
-      {
-        name: files[0].name,
-        content,
-        encoding: 'base64',
-        id: Date.now()
-      }
-    ]);
-  };
-
+const MessageFormContainer = ({ sendMessage, showThanksgivingMessage }) => {
   return (
-    <MessageForm
-      fileLoadingError={fileLoadingError}
-      validationSchema={validationSchema}
-      handleUploadFile={handleUploadFile}
+    <Formik
       initialValues={initialValues}
-      {...props}
-    />
+      validationSchema={validationSchema}
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        sendMessage(values).then(() => {
+          setSubmitting(false);
+          resetForm();
+          showThanksgivingMessage(values.mca);
+        });
+      }}
+    >
+      {({ isSubmitting, handleSubmit, values: { attaches }}) => (
+        <MessageForm
+          isSubmitting={isSubmitting}
+          handleSubmit={handleSubmit}
+          attaches={attaches} />
+        )}
+    </Formik>
   );
 };
-
-// const mapStateToProps = ({ thanksgivingMessage: { email } }) => ({
-//   email
-// });
 
 export default connect(() => ({}), { sendMessage, showThanksgivingMessage })(
   MessageFormContainer
