@@ -1,8 +1,8 @@
+/* Import libraries */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
-const TextArea = ({ label, ...props }) => {
+const TextArea = ({ label, component, ...props }) => {
   const { id, name } = props;
   const [field, meta] = useField(props);
 
@@ -17,12 +17,6 @@ const TextArea = ({ label, ...props }) => {
       ) : null}
     </>
   );
-};
-
-TextArea.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default TextArea;

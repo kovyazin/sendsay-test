@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import reducer from './reducer';
+import formReducer from './formReducer';
+import thanksgivingMessageReducer from './thanksgivingMessageReducer';
 
 const rootReducer = combineReducers({
-  reducer
+  form: formReducer,
+  thanksgivingMessage: thanksgivingMessageReducer
 });
 
 export default rootReducer;

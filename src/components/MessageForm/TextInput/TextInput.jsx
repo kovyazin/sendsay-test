@@ -1,5 +1,5 @@
+/* Import libraries */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
 const TextInput = ({ label, ...props }) => {
@@ -17,12 +17,6 @@ const TextInput = ({ label, ...props }) => {
       ) : null}
     </>
   );
-};
-
-TextInput.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default TextInput;

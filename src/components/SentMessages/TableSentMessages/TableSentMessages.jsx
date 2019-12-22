@@ -1,5 +1,10 @@
+/* Import libraries */
 import React from 'react';
+
+/* Import components */
 import SentMessagesItem from './SentMessagesItem/SentMessagesItem';
+
+/* Import styles */
 import './TableSentMessages.css';
 
 const TableSentMessages = ({ sentMessages }) => {
@@ -13,21 +18,26 @@ const TableSentMessages = ({ sentMessages }) => {
         </tr>
       </thead>
       <tbody>
-        {
-          sentMessages.map(({ id, values: { message }, result: { status = 0, date = null } = {} }) => {
+        {sentMessages.map(
+          ({
+            id,
+            values: { message },
+            result: { status = 0, date = null } = {}
+          }) => {
             return (
               <SentMessagesItem
                 key={id}
                 message={message}
                 id={id}
                 status={status}
-                date={date} />
-            )
-          })
-        }
+                date={date}
+              />
+            );
+          }
+        )}
       </tbody>
     </table>
-  )
-}
+  );
+};
 
 export default TableSentMessages;

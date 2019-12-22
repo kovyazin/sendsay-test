@@ -1,13 +1,16 @@
+/* Import libraries */
 import React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import './App.css';
-
+/* Import components */
 import Logo from '../Logo/Logo';
-import MessageForm from '../MessageForm/MessageForm';
+import MessageForm from '../MessageForm/MessageFormContainer';
 import SentMessages from '../SentMessages/SentMessages';
 import ThanksgivingMessage from '../ThanksgivingMessage/ThanksgivingMessage';
+
+/* Import styles */
+import './App.css';
 
 const App = ({ isShowThanksgivingMessage }) => {
   return (
@@ -16,16 +19,12 @@ const App = ({ isShowThanksgivingMessage }) => {
       <div className="app-form">
         <TransitionGroup>
           {!isShowThanksgivingMessage && (
-            <CSSTransition
-              classNames="fade"
-              timeout={0}>
+            <CSSTransition classNames="fade" timeout={0}>
               <MessageForm />
             </CSSTransition>
           )}
           {isShowThanksgivingMessage && (
-            <CSSTransition
-              classNames="fade"
-              timeout={0}>
+            <CSSTransition classNames="fade" timeout={0}>
               <ThanksgivingMessage />
             </CSSTransition>
           )}
@@ -35,11 +34,11 @@ const App = ({ isShowThanksgivingMessage }) => {
         <SentMessages />
       </div>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = ({ reducer: { isShowThanksgivingMessage } }) => {
-  return { isShowThanksgivingMessage }
-}
+const mapStateToProps = ({ thanksgivingMessage: { isShow: isShowThanksgivingMessage } }) => ({
+  isShowThanksgivingMessage
+});
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

@@ -3,7 +3,7 @@ import Sendsay from 'sendsay-api';
 const apiKey = '192D7YRfBa7DSUVVQIJ1m-KsCxOsTp0qum0tKw3SlO8XShNe2xLDWtd2LA6GVxJiQmR07ouhOtA';
 const sendsay = new Sendsay({ apiKey });
 
-const transformData = ({ subject, fromName, fromEmail, toName, message, mca }) => {
+const transformData = ({ subject, fromName, fromEmail, toName, message, mca, attaches }) => {
   return {
     action: 'issue.send.test',
     letter: {
@@ -12,7 +12,9 @@ const transformData = ({ subject, fromName, fromEmail, toName, message, mca }) =
       'from.email': fromEmail,
       'to.name': toName,
       message: { text: message },
-      attaches: []
+      attaches: attaches.map(({ name, content, encoding }) => ({
+        name, content, encoding
+      }))
     },
     sendwhen: 'test',
     mca: [mca]
