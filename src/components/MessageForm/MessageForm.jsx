@@ -30,10 +30,15 @@ const MessageForm = ({
             name="fromName"
             type="text"
             placeholder="Имя"
+            position="left"
           />
         </div>
         <div className="form-group">
-          <TextInput name="fromEmail" type="text" placeholder="Email" />
+          <TextInput
+            name="fromEmail"
+            type="text"
+            placeholder="Email"
+            position="right" />
         </div>
       </div>
       <div className="form-row">
@@ -43,10 +48,15 @@ const MessageForm = ({
             name="toName"
             type="text"
             placeholder="Имя"
+            position="left"
           />
         </div>
         <div className="form-group">
-          <TextInput name="toEmail" type="text" placeholder="Email" />
+          <TextInput
+            name="toEmail"
+            type="text"
+            placeholder="Email"
+            position="right" />
         </div>
       </div>
       <div className="form-row">
@@ -57,9 +67,13 @@ const MessageForm = ({
       <div className="form-row">
         <div className="form-group">
           <TextArea label="Сообщение" name="message" type="text" />
-          <AttachedFiles
-            attachedFiles={attachedFiles}
-            removeAttachedFile={removeAttachedFile} />
+          {
+            !!attachedFiles.length && (
+              <AttachedFiles
+                attachedFiles={attachedFiles}
+                removeAttachedFile={removeAttachedFile} />
+              )
+          }
           <ButtonUploadFile
             getInputProps={getInputProps} />
           {filesError && <div>{filesError}</div>}

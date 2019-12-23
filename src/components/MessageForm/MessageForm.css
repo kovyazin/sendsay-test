@@ -45,8 +45,20 @@
   background-color: #ffffff;
 }
 
+.form-row .form-group:nth-child(n + 2) .field-text {
+  border-left: none;
+}
+
 .field-text::placeholder {
   color: rgba(0, 0, 0, 0.4);
+}
+
+.field-text.left {
+  border-radius: 5px 0 0 5px;
+}
+
+.field-text.right {
+  border-radius: 0 5px 5px 0;
 }
 
 .field-text.field-input {
@@ -163,6 +175,7 @@
 
 .attached-files {
   margin-top: 5px;
+  margin-bottom: 5px;
   display: flex;
   flex-wrap: wrap;
 }
