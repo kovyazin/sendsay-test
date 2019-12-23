@@ -67,16 +67,14 @@ const MessageForm = ({
       <div className="form-row">
         <div className="form-group">
           <TextArea label="Сообщение" name="message" type="text" />
-          {
-            !!attachedFiles.length && (
-              <AttachedFiles
-                attachedFiles={attachedFiles}
-                removeAttachedFile={removeAttachedFile} />
-              )
-          }
+          {!!attachedFiles.length && (
+            <AttachedFiles
+              attachedFiles={attachedFiles}
+              removeAttachedFile={removeAttachedFile} />
+          )}
           <ButtonUploadFile
             getInputProps={getInputProps} />
-          {filesError && <div>{filesError}</div>}
+          {filesError && <span className="form-warning">{filesError}</span>}
         </div>
       </div>
 

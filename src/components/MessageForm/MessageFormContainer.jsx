@@ -60,7 +60,9 @@ const MessageFormContainer = ({ sendMessage,
 
     console.log(acceptedFiles.reduce((sum, { size }) => size + sum, 0));
 
-    if (acceptedFiles.reduce((sum, { size }) => size + sum, 0) > _maxTotalSize) {
+    if (acceptedFiles.reduce((sum, { size }) => size + sum, 0)
+        + attachedFiles.reduce((sum, { size }) => size + sum, 0)
+        > _maxTotalSize) {
       setFilesError(`Общий размер файлов не должен превышать ${_maxTotalSize / 1000000} МБ`);
       return;
     }
