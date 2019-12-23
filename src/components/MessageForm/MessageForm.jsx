@@ -13,10 +13,15 @@ import './MessageForm.css';
 const MessageForm = ({
   isSubmitting,
   handleSubmit,
-  attaches
+  attachedFiles,
+  getRootProps,
+  getInputProps,
+  isDragActive,
+  removeAttachedFile,
+  filesError
 }) => {
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} {...getRootProps()} >
       <div className="form-title">Отправлялка сообщений</div>
       <div className="form-row">
         <div className="form-group">
@@ -41,7 +46,7 @@ const MessageForm = ({
           />
         </div>
         <div className="form-group">
-          <TextInput name="mca" type="text" placeholder="Email" />
+          <TextInput name="toEmail" type="text" placeholder="Email" />
         </div>
       </div>
       <div className="form-row">
@@ -52,14 +57,27 @@ const MessageForm = ({
       <div className="form-row">
         <div className="form-group">
           <TextArea label="Сообщение" name="message" type="text" />
-          <AttachedFiles attaches={attaches} />
-          <ButtonUploadFile attaches={attaches} />
+          <AttachedFiles
+            attachedFiles={attachedFiles}
+            removeAttachedFile={removeAttachedFile} />
+          <ButtonUploadFile
+            getInputProps={getInputProps} />
+          {filesError && <div>{filesError}</div>}
         </div>
       </div>
 
       <button type="submit" className="btn-send" disabled={isSubmitting}>
         Отправить
       </button>
+
+      <div className={`dragndrop-zone ${isDragActive ? 'active' : ''}`}>
+        <div className="dragndrop-zone-title">Бросайте файлы сюда, я ловлю</div>
+        <div className="dragndrop-zone-text">
+          Мы принимаем картинки (jpg, png, gif), офисные файлы
+          (doc, xls, pdf) и zip-архивы. Размеры файла до 5 МБ
+        </div>
+      </div>
+
     </form>
   );
 };

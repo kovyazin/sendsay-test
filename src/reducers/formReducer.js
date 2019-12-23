@@ -1,7 +1,13 @@
-import { SEND_MESSAGE, UPDATE_MESSAGE_STATUS } from "../constants/form";
+import {
+  SEND_MESSAGE, UPDATE_MESSAGE_STATUS,
+  ADD_ATTACHED_FILE, CLEAN_ATTACHED_FILES,
+  REMOVE_ATTACHED_FILE, SET_FILES_ERROR
+} from "../constants/form";
 
 const initialState = {
-  sentMessages: []
+  sentMessages: [],
+  attachedFiles: [],
+  filesError: null
 };
 
 const formReducer = (state = initialState, action) => {
@@ -34,6 +40,39 @@ const formReducer = (state = initialState, action) => {
           }
           return msg;
         })
+      }
+    case ADD_ATTACHED_FILE:
+      return {
+        ...state,
+        filesError: null,
+        attachedFiles: [
+          ...state.attachedFiles,
+          {
+            name: action.payload.name,
+            base64: action.payload.base64,
+            size: action.payload.size,
+            encoding: 'base64'
+          }
+        ]
+      }
+    case REMOVE_ATTACHED_FILE: {
+      return {
+        ...state,
+        filesError: null,
+        attachedFiles: state.attachedFiles
+          .filter(({ name }) => name !== action.payload.name )
+      }
+    }
+    case CLEAN_ATTACHED_FILES: {
+      return {
+        ...state,
+        attachedFiles: []
+      }
+    }
+    case SET_FILES_ERROR:
+      return {
+        ...state,
+        filesError: action.payload.msg
       }
     default:
       return state;

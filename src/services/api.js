@@ -12,8 +12,8 @@ const transformData = ({ subject, fromName, fromEmail, toName, toEmail, message,
       'from.email': fromEmail,
       'to.name': toName,
       message: { text: message },
-      attaches: attaches.map(({ name, content, encoding }) => ({
-        name, content, encoding
+      attaches: attaches.map(({ name, base64, encoding }) => ({
+        name, base64, encoding
       }))
     },
     sendwhen: 'test',

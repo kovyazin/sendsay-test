@@ -4,7 +4,7 @@ import React from 'react';
 /* Import styles */
 import './ButtonUploadFile.css';
 
-export const ButtonUploadFile = () => {
+export const ButtonUploadFile = ({ getInputProps }) => {
   return (
     <label htmlFor="btn-file" className="btn-file-label">
       Прикрепить файл
@@ -12,7 +12,8 @@ export const ButtonUploadFile = () => {
         type="file"
         name="btn-file"
         id="btn-file"
-        className="btn-file" />
+        className="btn-file"
+        {...getInputProps()} />
     </label>
   );
 };
