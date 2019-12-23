@@ -110,6 +110,7 @@ const MessageFormContainer = ({ sendMessage,
           setSubmitting(false);
           resetForm();
           cleanAttachedFiles();
+          setFilesError(null);
           showThanksgivingMessage(values.toEmail);
         });
       }}
