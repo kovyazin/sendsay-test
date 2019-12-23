@@ -2,7 +2,7 @@
 import React from 'react';
 import { useField } from 'formik';
 
-const TextInput = ({ label, position, ...props }) => {
+const TextInput = ({ label, position, isSubmitting, ...props }) => {
   const { id, name } = props;
   const [field, meta] = useField(props);
 
@@ -11,7 +11,11 @@ const TextInput = ({ label, position, ...props }) => {
       <label htmlFor={id || name} className="field-label">
         {label}
       </label>
-      <input className={`field-text field-input ${position ? position : ''}`} {...field} {...props} />
+      <input
+        className={`field-text field-input ${position ? position : ''}`}
+        disabled={isSubmitting}
+        {...field}
+        {...props} />
       {meta.touched && meta.error ? (
         <div className="form-warning">{meta.error}</div>
       ) : null}

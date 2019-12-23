@@ -1,6 +1,6 @@
 import React from "react";
 
-const AttachedFiles = ({ attachedFiles, removeAttachedFile }) => {
+const AttachedFiles = ({ attachedFiles, removeAttachedFile, isSubmitting }) => {
   return (
     <div className="attached-files">
       {attachedFiles.map(({ name }) => {
@@ -10,6 +10,7 @@ const AttachedFiles = ({ attachedFiles, removeAttachedFile }) => {
             <button
               type="button"
               className="attached-files-btn-delete"
+              disabled={isSubmitting}
               onClick={() => removeAttachedFile(name)}>
               Удалить
             </button>

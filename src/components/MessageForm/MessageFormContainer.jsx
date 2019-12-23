@@ -58,7 +58,6 @@ const MessageFormContainer = ({ sendMessage,
 
   const onDrop = useCallback((acceptedFiles) => {
 
-    console.log(acceptedFiles.reduce((sum, { size }) => size + sum, 0));
 
     if (acceptedFiles.reduce((sum, { size }) => size + sum, 0)
         + attachedFiles.reduce((sum, { size }) => size + sum, 0)

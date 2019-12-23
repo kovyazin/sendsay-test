@@ -31,14 +31,15 @@ const MessageForm = ({
             type="text"
             placeholder="Имя"
             position="left"
-          />
+            isSubmitting={isSubmitting} />
         </div>
         <div className="form-group">
           <TextInput
             name="fromEmail"
             type="text"
             placeholder="Email"
-            position="right" />
+            position="right"
+            isSubmitting={isSubmitting} />
         </div>
       </div>
       <div className="form-row">
@@ -49,31 +50,42 @@ const MessageForm = ({
             type="text"
             placeholder="Имя"
             position="left"
-          />
+            isSubmitting={isSubmitting} />
         </div>
         <div className="form-group">
           <TextInput
             name="toEmail"
             type="text"
             placeholder="Email"
-            position="right" />
+            position="right"
+            isSubmitting={isSubmitting} />
         </div>
       </div>
       <div className="form-row">
         <div className="form-group">
-          <TextInput label="Тема письма" name="subject" type="text" />
+          <TextInput
+            label="Тема письма"
+            name="subject"
+            type="text"
+            isSubmitting={isSubmitting} />
         </div>
       </div>
       <div className="form-row">
         <div className="form-group">
-          <TextArea label="Сообщение" name="message" type="text" />
+          <TextArea
+            label="Сообщение"
+            name="message"
+            type="text"
+            isSubmitting={isSubmitting} />
           {!!attachedFiles.length && (
             <AttachedFiles
               attachedFiles={attachedFiles}
-              removeAttachedFile={removeAttachedFile} />
+              removeAttachedFile={removeAttachedFile}
+              isSubmitting={isSubmitting}/>
           )}
           <ButtonUploadFile
-            getInputProps={getInputProps} />
+            getInputProps={getInputProps}
+            isSubmitting={isSubmitting} />
           {filesError && <span className="form-warning">{filesError}</span>}
         </div>
       </div>
