@@ -1,109 +1,147 @@
 /* Import libraries */
-import React from 'react';
+import React, {useCallback} from 'react';
+import {connect} from 'react-redux';
+import * as Yup from 'yup';
+import {useDropzone} from "react-dropzone";
+
+/* Import action creators */
+import {
+  sendMessage, addAttachedFile,
+  cleanAttachedFiles, removeAttachedFile,
+  setFilesError
+} from '../../actionCreators/form';
+import {showThanksgivingMessage} from '../../actionCreators/thanksgivingMessage';
 
 /* Import components */
-import TextArea from './TextArea/TextArea';
-import TextInput from './TextInput/TextInput';
-import ButtonUploadFile from './ButtonUploadFile/ButtonUploadFile';
-import AttachedFiles from "./AttachedFiles/AttachedFiles";
+import MessageFormView from './MessageFormView';
+import {Formik} from "formik";
 
-/* Import styles */
-import './MessageForm.css';
+const validationSchema = Yup.object({
+  fromName: Yup.string().required('Имя не может быть пустым'),
+  fromEmail: Yup.string()
+    .email('Введите корректный Email')
+    .required('Email не может быть пустым'),
+  toName: Yup.string().required('Имя не может быть пустым'),
+  toEmail: Yup.string()
+    .email('Введите корректный Email')
+    .required('Email не может быть пустым'),
+  subject: Yup.string()
+    .max(30, 'Максимальная длина не должна превышать 30 символов')
+    .min(10, 'Минимальная длина темы не может быть менее 10 символов')
+    .required('Название темы не может быть пустой'),
+  message: Yup.string()
+    .max(500, 'Максимальная длина сообщения не должна превышать 500 символов')
+    .min(30, 'Минимальная длина сообщения не может быть менее 30 символов')
+    .required('Сообщение не может быть пустым')
+});
 
-const MessageForm = ({
-  isSubmitting,
-  handleSubmit,
-  attachedFiles,
-  getRootProps,
-  getInputProps,
-  isDragActive,
-  removeAttachedFile,
-  filesError
-}) => {
+const initialValues = {
+  fromName: '',
+  fromEmail: '',
+  toName: '',
+  toEmail: '',
+  subject: '',
+  message: ''
+};
+
+const MessageForm = ({ sendMessage,
+                                showThanksgivingMessage,
+                                attachedFiles,
+                                addAttachedFile,
+                                cleanAttachedFiles,
+                                removeAttachedFile,
+                                setFilesError,
+                                filesError }) => {
+
+  const _maxSize = 5000000;
+  const _maxTotalSize = 20000000;
+
+  const onDrop = useCallback((acceptedFiles) => {
+
+
+    if (acceptedFiles.reduce((sum, { size }) => size + sum, 0)
+        + attachedFiles.reduce((sum, { size }) => size + sum, 0)
+        > _maxTotalSize) {
+      setFilesError(`Общий размер файлов не должен превышать ${_maxTotalSize / 1000000} МБ`);
+      return;
+    }
+
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onabort = () => console.log('file reading was aborted');
+      reader.onerror = () => setFilesError('Произошла ошибка чтения файла');
+      reader.onload = () => {
+        const {name: currentName, size: currentSize} = file;
+        const totalSize = attachedFiles.reduce((sum, { size }) => sum + size, currentSize);
+
+        if (!attachedFiles.some(({ name }) => name === currentName) && totalSize < _maxTotalSize) {
+          addAttachedFile(currentName, reader.result, currentSize);
+        }
+        if (totalSize > _maxTotalSize) {
+          setFilesError(`Общий размер файлов не должен превышать ${_maxTotalSize / 1000000} МБ`)
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+  }, [attachedFiles, setFilesError, addAttachedFile]);
+
+  const onDropRejected = useCallback((rejectedFiles) => {
+    rejectedFiles.forEach(({ size }) => {
+      if (size > _maxSize) {
+        setFilesError(`Максимальный размер одного файла не должен превышать ${_maxSize / 1000000} МБ`);
+      } else {
+        setFilesError('Произошла ошибка загрузки файла');
+      }
+    });
+  }, [setFilesError]);
+
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive} = useDropzone({onDrop, onDropRejected, noClick: true, maxSize: _maxSize});
+
   return (
-    <form className="form" onSubmit={handleSubmit} {...getRootProps()} >
-      <div className="form-title">Отправлялка сообщений</div>
-      <div className="form-row">
-        <div className="form-group">
-          <TextInput
-            label="От кого"
-            name="fromName"
-            type="text"
-            placeholder="Имя"
-            position="left"
-            isSubmitting={isSubmitting} />
-        </div>
-        <div className="form-group">
-          <TextInput
-            name="fromEmail"
-            type="text"
-            placeholder="Email"
-            position="right"
-            isSubmitting={isSubmitting} />
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-group">
-          <TextInput
-            label="Кому"
-            name="toName"
-            type="text"
-            placeholder="Имя"
-            position="left"
-            isSubmitting={isSubmitting} />
-        </div>
-        <div className="form-group">
-          <TextInput
-            name="toEmail"
-            type="text"
-            placeholder="Email"
-            position="right"
-            isSubmitting={isSubmitting} />
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-group">
-          <TextInput
-            label="Тема письма"
-            name="subject"
-            type="text"
-            isSubmitting={isSubmitting} />
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-group">
-          <TextArea
-            label="Сообщение"
-            name="message"
-            type="text"
-            isSubmitting={isSubmitting} />
-          {!!attachedFiles.length && (
-            <AttachedFiles
-              attachedFiles={attachedFiles}
-              removeAttachedFile={removeAttachedFile}
-              isSubmitting={isSubmitting}/>
-          )}
-          <ButtonUploadFile
-            getInputProps={getInputProps}
-            isSubmitting={isSubmitting} />
-          {filesError && <span className="form-warning">{filesError}</span>}
-        </div>
-      </div>
-
-      <button type="submit" className="btn-send" disabled={isSubmitting}>
-        Отправить
-      </button>
-
-      <div className={`dragndrop-zone ${isDragActive ? 'active' : ''}`}>
-        <div className="dragndrop-zone-title">Бросайте файлы сюда, я ловлю</div>
-        <div className="dragndrop-zone-text">
-          Мы принимаем картинки (jpg, png, gif), офисные файлы
-          (doc, xls, pdf) и zip-архивы. Размеры файла до 5 МБ
-        </div>
-      </div>
-
-    </form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(values, {setSubmitting, resetForm}) => {
+        sendMessage({...values, attaches: attachedFiles}).then(() => {
+          setSubmitting(false);
+          resetForm();
+          cleanAttachedFiles();
+          setFilesError(null);
+          showThanksgivingMessage(values.toEmail);
+        });
+      }}
+    >
+      {({isSubmitting, handleSubmit}) => (
+        <MessageFormView
+          isSubmitting={isSubmitting}
+          handleSubmit={handleSubmit}
+          attachedFiles={attachedFiles}
+          getRootProps={getRootProps}
+          getInputProps={getInputProps}
+          isDragActive={isDragActive}
+          removeAttachedFile={removeAttachedFile}
+          filesError={filesError} />
+      )}
+    </Formik>
   );
 };
 
-export default MessageForm;
+const mapStateToProps = ({form: {attachedFiles, filesError }}) => ({
+  attachedFiles,
+  filesError
+});
+
+export default connect(mapStateToProps,
+  {
+    sendMessage,
+    showThanksgivingMessage,
+    addAttachedFile,
+    removeAttachedFile,
+    cleanAttachedFiles,
+    setFilesError
+  })(MessageForm);

@@ -1,5 +1,5 @@
 /* Import libraries */
-import React, { Component } from 'react';
+import React, {Component, useEffect} from 'react';
 import { connect } from 'react-redux';
 
 /* Import action creators */
@@ -22,16 +22,14 @@ const ThanksgivingMessage = ({ email }) => {
   );
 };
 
-class ThanksgivingMessageContainer extends Component {
-  componentDidMount() {
-    setTimeout(this.props.hideThanksgivingMessage, 7000);
-  }
+const ThanksgivingMessageContainer = ({ email, hideThanksgivingMessage }) => {
+  useEffect(() => {
+    const timer = setTimeout(hideThanksgivingMessage, 7000);
+    return () => clearTimeout(timer);
+  });
 
-  render() {
-    const { email } = this.props;
-    return <ThanksgivingMessage email={email} />;
-  }
-}
+  return <ThanksgivingMessage email={email} />;
+};
 
 const mapStateToProps = ({ thanksgivingMessage: { email } }) => ({
    email

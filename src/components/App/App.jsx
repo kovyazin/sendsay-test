@@ -5,7 +5,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 /* Import components */
 import Logo from '../Logo/Logo';
-import MessageForm from '../MessageForm/MessageFormContainer';
+import MessageForm from '../MessageForm/MessageForm';
 import SentMessages from '../SentMessages/SentMessages';
 import ThanksgivingMessage from '../ThanksgivingMessage/ThanksgivingMessage';
 
