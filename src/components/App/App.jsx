@@ -10,13 +10,13 @@ import SentMessages from '../SentMessages/SentMessages';
 import ThanksgivingMessage from '../ThanksgivingMessage/ThanksgivingMessage';
 
 /* Import styles */
-import './App.css';
+import styles from './App.module.css';
 
 const App = ({ isShowThanksgivingMessage }) => {
   return (
-    <div className="app">
+    <div className={styles.app}>
       <Logo />
-      <div className="app-form">
+      <div className={styles.form}>
         <TransitionGroup>
           {!isShowThanksgivingMessage && (
             <CSSTransition classNames="fade" timeout={0}>
@@ -30,7 +30,7 @@ const App = ({ isShowThanksgivingMessage }) => {
           )}
         </TransitionGroup>
       </div>
-      <div className="app-messages">
+      <div className={styles.messages}>
         <SentMessages />
       </div>
     </div>

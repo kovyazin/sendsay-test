@@ -8,7 +8,12 @@ import { hideThanksgivingMessage } from '../../actionCreators/thanksgivingMessag
 /* Import styles */
 import './ThanksgivingMessage.css';
 
-const ThanksgivingMessage = ({ email }) => {
+const ThanksgivingMessage = ({ email, hideThanksgivingMessage }) => {
+  useEffect(() => {
+    const timer = setTimeout(hideThanksgivingMessage, 7000);
+    return () => clearTimeout(timer);
+  });
+
   return (
     <div className="thanksgiving-message">
       <div className="thanksgiving-message-title">
@@ -22,19 +27,10 @@ const ThanksgivingMessage = ({ email }) => {
   );
 };
 
-const ThanksgivingMessageContainer = ({ email, hideThanksgivingMessage }) => {
-  useEffect(() => {
-    const timer = setTimeout(hideThanksgivingMessage, 7000);
-    return () => clearTimeout(timer);
-  });
-
-  return <ThanksgivingMessage email={email} />;
-};
-
 const mapStateToProps = ({ thanksgivingMessage: { email } }) => ({
    email
 });
 
 export default connect(mapStateToProps, { hideThanksgivingMessage })(
-  ThanksgivingMessageContainer
+  ThanksgivingMessage
 );
