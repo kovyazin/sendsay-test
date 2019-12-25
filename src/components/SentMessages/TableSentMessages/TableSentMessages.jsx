@@ -1,11 +1,11 @@
 /* Import libraries */
-import React from 'react';
+import React from 'react'
 
 /* Import components */
-import SentMessagesItem from './SentMessagesItem/SentMessagesItem';
+import SentMessagesItem from './SentMessagesItem/SentMessagesItem'
 
 /* Import styles */
-import styles from './TableSentMessages.module.css';
+import styles from './TableSentMessages.module.css'
 
 const TableSentMessages = ({ sentMessages }) => {
   return (
@@ -32,12 +32,12 @@ const TableSentMessages = ({ sentMessages }) => {
                 status={status}
                 date={date}
               />
-            );
+            )
           }
         )}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default TableSentMessages;
+export default TableSentMessages

@@ -1,10 +1,10 @@
 /* Import libraries */
-import React from 'react';
-import moment from 'moment';
-import ru from 'moment/locale/ru';
+import React from 'react'
+import moment from 'moment'
+import ru from 'moment/locale/ru'
 
 /* Import styles */
-import styles from './SentMessagesItem.module.css';
+import styles from './SentMessagesItem.module.css'
 
 const SentMessagesItemView = ({ message, date, status }) => {
   return (
@@ -24,7 +24,7 @@ const SentMessagesItemView = ({ message, date, status }) => {
         {status > -1 && <span className={styles.waiting}>В процессе</span>}
       </td>
     </tr>
-  );
-};
+  )
+}
 
-export default SentMessagesItemView;
+export default SentMessagesItemView

@@ -1,8 +1,8 @@
 /* Import libraries */
-import React from 'react';
+import React from 'react'
 
 /* Import styles */
-import styles from './ButtonUploadFile.module.css';
+import styles from './ButtonUploadFile.module.css'
 
 export const ButtonUploadFile = ({ getInputProps, isSubmitting }) => {
   return (
@@ -14,9 +14,10 @@ export const ButtonUploadFile = ({ getInputProps, isSubmitting }) => {
         id="btn-file"
         className={styles.btnFile}
         disabled={isSubmitting}
-        {...getInputProps()} />
+        {...getInputProps()}
+      />
     </label>
-  );
-};
+  )
+}
 
-export default ButtonUploadFile;
+export default ButtonUploadFile

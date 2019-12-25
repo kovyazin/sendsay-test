@@ -1,15 +1,15 @@
 /* Import libraries */
-import React from 'react';
+import React from 'react'
 
 /* Import components */
-import TextArea from './TextArea/TextArea';
-import TextInput from './TextInput/TextInput';
-import ButtonUploadFile from './ButtonUploadFile/ButtonUploadFile';
-import AttachedFiles from "./AttachedFiles/AttachedFiles";
-import DragndropZone from "./DragndropZone/DragndropZone";
+import TextArea from './TextArea/TextArea'
+import TextInput from './TextInput/TextInput'
+import ButtonUploadFile from './ButtonUploadFile/ButtonUploadFile'
+import AttachedFiles from './AttachedFiles/AttachedFiles'
+import DragndropZone from './DragndropZone/DragndropZone'
 
 /* Import styles */
-import styles from './MessageForm.module.css';
+import styles from './MessageForm.module.css'
 
 const MessageFormView = ({
   isSubmitting,
@@ -22,7 +22,7 @@ const MessageFormView = ({
   filesError
 }) => {
   return (
-    <form className={styles.form} onSubmit={handleSubmit} {...getRootProps()} >
+    <form className={styles.form} onSubmit={handleSubmit} {...getRootProps()}>
       <div className={styles.title}>Отправлялка сообщений</div>
       <div className={styles.row}>
         <div className={styles.group}>
@@ -32,7 +32,8 @@ const MessageFormView = ({
             type="text"
             placeholder="Имя"
             position="left"
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
         </div>
         <div className={styles.group}>
           <TextInput
@@ -40,7 +41,8 @@ const MessageFormView = ({
             type="text"
             placeholder="Email"
             position="right"
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
       <div className={styles.row}>
@@ -51,7 +53,8 @@ const MessageFormView = ({
             type="text"
             placeholder="Имя"
             position="left"
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
         </div>
         <div className={styles.group}>
           <TextInput
@@ -59,7 +62,8 @@ const MessageFormView = ({
             type="text"
             placeholder="Email"
             position="right"
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
       <div className={styles.row}>
@@ -68,7 +72,8 @@ const MessageFormView = ({
             label="Тема письма"
             name="subject"
             type="text"
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
       <div className={styles.row}>
@@ -77,16 +82,19 @@ const MessageFormView = ({
             label="Сообщение"
             name="message"
             type="text"
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
           {!!attachedFiles.length && (
             <AttachedFiles
               attachedFiles={attachedFiles}
               removeAttachedFile={removeAttachedFile}
-              isSubmitting={isSubmitting}/>
+              isSubmitting={isSubmitting}
+            />
           )}
           <ButtonUploadFile
             getInputProps={getInputProps}
-            isSubmitting={isSubmitting} />
+            isSubmitting={isSubmitting}
+          />
           {filesError && <span className={styles.warning}>{filesError}</span>}
         </div>
       </div>
@@ -96,9 +104,8 @@ const MessageFormView = ({
       </button>
 
       <DragndropZone isDragActive={isDragActive} />
-
     </form>
-  );
-};
+  )
+}
 
-export default MessageFormView;
+export default MessageFormView

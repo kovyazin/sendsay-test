@@ -1,20 +1,22 @@
 /* Import libraries */
-import React, {useCallback} from 'react';
-import {connect} from 'react-redux';
-import * as Yup from 'yup';
-import {useDropzone} from "react-dropzone";
+import React, { useCallback } from 'react'
+import { connect } from 'react-redux'
+import * as Yup from 'yup'
+import { useDropzone } from 'react-dropzone'
 
 /* Import action creators */
 import {
-  sendMessage, addAttachedFile,
-  cleanAttachedFiles, removeAttachedFile,
+  sendMessage,
+  addAttachedFile,
+  cleanAttachedFiles,
+  removeAttachedFile,
   setFilesError
-} from '../../actionCreators/form';
-import {showThanksgivingMessage} from '../../actionCreators/thanksgivingMessage';
+} from '../../actionCreators/form'
+import { showThanksgivingMessage } from '../../actionCreators/thanksgivingMessage'
 
 /* Import components */
-import MessageFormView from './MessageFormView';
-import {Formik} from "formik";
+import MessageFormView from './MessageFormView'
+import { Formik } from 'formik'
 
 const validationSchema = Yup.object({
   fromName: Yup.string().required('Имя не может быть пустым'),
@@ -33,7 +35,7 @@ const validationSchema = Yup.object({
     .max(500, 'Максимальная длина сообщения не должна превышать 500 символов')
     .min(30, 'Минимальная длина сообщения не может быть менее 30 символов')
     .required('Сообщение не может быть пустым')
-});
+})
 
 const initialValues = {
   fromName: '',
@@ -42,81 +44,104 @@ const initialValues = {
   toEmail: '',
   subject: '',
   message: ''
-};
+}
 
-const MessageForm = ({ sendMessage,
-                                showThanksgivingMessage,
-                                attachedFiles,
-                                addAttachedFile,
-                                cleanAttachedFiles,
-                                removeAttachedFile,
-                                setFilesError,
-                                filesError }) => {
+const MessageForm = ({
+  sendMessage,
+  showThanksgivingMessage,
+  attachedFiles,
+  addAttachedFile,
+  cleanAttachedFiles,
+  removeAttachedFile,
+  setFilesError,
+  filesError
+}) => {
+  const _maxSize = 5000000
+  const _maxTotalSize = 20000000
 
-  const _maxSize = 5000000;
-  const _maxTotalSize = 20000000;
-
-  const onDrop = useCallback((acceptedFiles) => {
-
-
-    if (acceptedFiles.reduce((sum, { size }) => size + sum, 0)
-        + attachedFiles.reduce((sum, { size }) => size + sum, 0)
-        > _maxTotalSize) {
-      setFilesError(`Общий размер файлов не должен превышать ${_maxTotalSize / 1000000} МБ`);
-      return;
-    }
-
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader();
-
-      reader.onabort = () => console.log('file reading was aborted');
-      reader.onerror = () => setFilesError('Произошла ошибка чтения файла');
-      reader.onload = () => {
-        const {name: currentName, size: currentSize} = file;
-        const totalSize = attachedFiles.reduce((sum, { size }) => sum + size, currentSize);
-
-        if (!attachedFiles.some(({ name }) => name === currentName) && totalSize < _maxTotalSize) {
-          addAttachedFile(currentName, reader.result, currentSize);
-        }
-        if (totalSize > _maxTotalSize) {
-          setFilesError(`Общий размер файлов не должен превышать ${_maxTotalSize / 1000000} МБ`)
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-
-  }, [attachedFiles, setFilesError, addAttachedFile]);
-
-  const onDropRejected = useCallback((rejectedFiles) => {
-    rejectedFiles.forEach(({ size }) => {
-      if (size > _maxSize) {
-        setFilesError(`Максимальный размер одного файла не должен превышать ${_maxSize / 1000000} МБ`);
-      } else {
-        setFilesError('Произошла ошибка загрузки файла');
+  const onDrop = useCallback(
+    acceptedFiles => {
+      if (
+        acceptedFiles.reduce((sum, { size }) => size + sum, 0) +
+          attachedFiles.reduce((sum, { size }) => size + sum, 0) >
+        _maxTotalSize
+      ) {
+        setFilesError(
+          `Общий размер файлов не должен превышать ${_maxTotalSize /
+            1000000} МБ`
+        )
+        return
       }
-    });
-  }, [setFilesError]);
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive} = useDropzone({onDrop, onDropRejected, noClick: true, maxSize: _maxSize});
+      acceptedFiles.forEach(file => {
+        const reader = new FileReader()
+
+        reader.onabort = () => console.log('file reading was aborted')
+        reader.onerror = () => setFilesError('Произошла ошибка чтения файла')
+        reader.onload = () => {
+          const { name: currentName, size: currentSize } = file
+          const totalSize = attachedFiles.reduce(
+            (sum, { size }) => sum + size,
+            currentSize
+          )
+
+          if (
+            !attachedFiles.some(({ name }) => name === currentName) &&
+            totalSize < _maxTotalSize
+          ) {
+            addAttachedFile(currentName, reader.result, currentSize)
+          }
+          if (totalSize > _maxTotalSize) {
+            setFilesError(
+              `Общий размер файлов не должен превышать ${_maxTotalSize /
+                1000000} МБ`
+            )
+          }
+        }
+        reader.readAsDataURL(file)
+      })
+    },
+    [attachedFiles, setFilesError, addAttachedFile]
+  )
+
+  const onDropRejected = useCallback(
+    rejectedFiles => {
+      rejectedFiles.forEach(({ size }) => {
+        if (size > _maxSize) {
+          setFilesError(
+            `Максимальный размер одного файла не должен превышать ${_maxSize /
+              1000000} МБ`
+          )
+        } else {
+          setFilesError('Произошла ошибка загрузки файла')
+        }
+      })
+    },
+    [setFilesError]
+  )
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    onDropRejected,
+    noClick: true,
+    maxSize: _maxSize
+  })
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values, {setSubmitting, resetForm}) => {
-        sendMessage({...values, attaches: attachedFiles}).then(() => {
-          setSubmitting(false);
-          resetForm();
-          cleanAttachedFiles();
-          setFilesError(null);
-          showThanksgivingMessage(values.toEmail);
-        });
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        sendMessage({ ...values, attaches: attachedFiles }).then(() => {
+          setSubmitting(false)
+          resetForm()
+          cleanAttachedFiles()
+          setFilesError(null)
+          showThanksgivingMessage(values.toEmail)
+        })
       }}
     >
-      {({isSubmitting, handleSubmit}) => (
+      {({ isSubmitting, handleSubmit }) => (
         <MessageFormView
           isSubmitting={isSubmitting}
           handleSubmit={handleSubmit}
@@ -125,23 +150,23 @@ const MessageForm = ({ sendMessage,
           getInputProps={getInputProps}
           isDragActive={isDragActive}
           removeAttachedFile={removeAttachedFile}
-          filesError={filesError} />
+          filesError={filesError}
+        />
       )}
     </Formik>
-  );
-};
+  )
+}
 
-const mapStateToProps = ({form: {attachedFiles, filesError }}) => ({
+const mapStateToProps = ({ form: { attachedFiles, filesError } }) => ({
   attachedFiles,
   filesError
-});
+})
 
-export default connect(mapStateToProps,
-  {
-    sendMessage,
-    showThanksgivingMessage,
-    addAttachedFile,
-    removeAttachedFile,
-    cleanAttachedFiles,
-    setFilesError
-  })(MessageForm);
+export default connect(mapStateToProps, {
+  sendMessage,
+  showThanksgivingMessage,
+  addAttachedFile,
+  removeAttachedFile,
+  cleanAttachedFiles,
+  setFilesError
+})(MessageForm)

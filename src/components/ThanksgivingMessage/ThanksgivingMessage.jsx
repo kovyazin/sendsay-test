@@ -1,18 +1,18 @@
 /* Import libraries */
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 
 /* Import action creators */
-import { hideThanksgivingMessage } from '../../actionCreators/thanksgivingMessage';
+import { hideThanksgivingMessage } from '../../actionCreators/thanksgivingMessage'
 
 /* Import styles */
-import styles from './ThanksgivingMessage.module.css';
+import styles from './ThanksgivingMessage.module.css'
 
 const ThanksgivingMessage = ({ email, hideThanksgivingMessage }) => {
   useEffect(() => {
-    const timer = setTimeout(hideThanksgivingMessage, 7000);
-    return () => clearTimeout(timer);
-  });
+    const timer = setTimeout(hideThanksgivingMessage, 7000)
+    return () => clearTimeout(timer)
+  })
 
   return (
     <div className={styles.thanksgivingMessage}>
@@ -24,13 +24,13 @@ const ThanksgivingMessage = ({ email, hideThanksgivingMessage }) => {
         почты получателя «{email}» со скоростью электронов.
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = ({ thanksgivingMessage: { email } }) => ({
-   email
-});
+  email
+})
 
 export default connect(mapStateToProps, { hideThanksgivingMessage })(
   ThanksgivingMessage
-);
+)

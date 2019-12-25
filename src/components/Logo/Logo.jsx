@@ -1,15 +1,15 @@
 /* Import libraries */
-import React from 'react';
+import React from 'react'
 
 /* Import images */
-import logo from './logo.svg';
+import logo from './logo.svg'
 
 const Logo = props => {
   return (
     <div>
       <img src={logo} alt="Logo" />
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

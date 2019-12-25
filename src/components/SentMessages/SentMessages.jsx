@@ -1,12 +1,12 @@
 /* Import libraries */
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
 /* Import components */
-import TableSentMessages from './TableSentMessages/TableSentMessages';
+import TableSentMessages from './TableSentMessages/TableSentMessages'
 
 /* Import styles */
-import styles from './SentMessages.module.css';
+import styles from './SentMessages.module.css'
 
 const SentMessages = ({ sentMessages }) => {
   return (
@@ -17,11 +17,11 @@ const SentMessages = ({ sentMessages }) => {
       )}
       {!sentMessages.length && <div>Сообщения ещё не отправлялись</div>}
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = ({ form: { sentMessages } }) => ({
   sentMessages
-});
+})
 
-export default connect(mapStateToProps)(SentMessages);
+export default connect(mapStateToProps)(SentMessages)

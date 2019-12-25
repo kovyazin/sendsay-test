@@ -1,13 +1,13 @@
 /* Import libraries */
-import React from 'react';
-import { useField } from 'formik';
+import React from 'react'
+import { useField } from 'formik'
 
 /* Import styles */
-import styles from './TextArea.module.css';
+import styles from './TextArea.module.css'
 
 const TextArea = ({ label, component, isSubmitting, ...props }) => {
-  const { id, name } = props;
-  const [field, meta] = useField(props);
+  const { id, name } = props
+  const [field, meta] = useField(props)
 
   return (
     <>
@@ -18,12 +18,13 @@ const TextArea = ({ label, component, isSubmitting, ...props }) => {
         className={styles.field}
         disabled={isSubmitting}
         {...field}
-        {...props} />
+        {...props}
+      />
       {meta.touched && meta.error ? (
         <div className={styles.warning}>{meta.error}</div>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default TextArea;
+export default TextArea

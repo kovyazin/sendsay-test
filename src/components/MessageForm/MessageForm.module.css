@@ -76,7 +76,7 @@
   background-color: #c4c4c4;
   background-image: linear-gradient(to bottom, #45a6ff 0%, #0055fb 100%);
 
-  transition: .2s linear;
+  transition: 0.2s linear;
 
   cursor: pointer;
   outline: none;
@@ -94,7 +94,7 @@
   border: 2px solid #45a5ff;
   border-radius: 7px;
 
-  transition: .2s linear;
+  transition: 0.2s linear;
 
   opacity: 0.5;
   content: '';
@@ -110,7 +110,7 @@
 
   border-radius: 5px;
 
-  transition: .2s linear;
+  transition: 0.2s linear;
 
   content: '';
 }

@@ -34,7 +34,7 @@
   width: 34px;
   height: 30px;
 
-  background: url('clip.svg') no-repeat center /contain;
+  background: url('clip.svg') no-repeat center / contain;
 
   content: '';
 }
@@ -82,7 +82,7 @@
   width: 13px;
   height: 16px;
 
-  background: url('./trash.svg') no-repeat center /contain;
+  background: url('./trash.svg') no-repeat center / contain;
 
   content: '';
 }

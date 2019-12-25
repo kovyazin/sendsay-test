@@ -1,17 +1,20 @@
 import {
-  SEND_MESSAGE, UPDATE_MESSAGE_STATUS,
-  ADD_ATTACHED_FILE, CLEAN_ATTACHED_FILES,
-  REMOVE_ATTACHED_FILE, SET_FILES_ERROR
-} from "../constants/form";
+  SEND_MESSAGE,
+  UPDATE_MESSAGE_STATUS,
+  ADD_ATTACHED_FILE,
+  CLEAN_ATTACHED_FILES,
+  REMOVE_ATTACHED_FILE,
+  SET_FILES_ERROR
+} from '../constants/form'
 
 const initialState = {
   sentMessages: [],
   attachedFiles: [],
   filesError: null
-};
+}
 
 const formReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SEND_MESSAGE:
       return {
         ...state,
@@ -28,7 +31,7 @@ const formReducer = (state = initialState, action) => {
     case UPDATE_MESSAGE_STATUS:
       return {
         ...state,
-        sentMessages: state.sentMessages.map((msg) => {
+        sentMessages: state.sentMessages.map(msg => {
           if (msg.id === action.id) {
             return {
               ...msg,
@@ -38,7 +41,7 @@ const formReducer = (state = initialState, action) => {
               }
             }
           }
-          return msg;
+          return msg
         })
       }
     case ADD_ATTACHED_FILE:
@@ -59,8 +62,9 @@ const formReducer = (state = initialState, action) => {
       return {
         ...state,
         filesError: null,
-        attachedFiles: state.attachedFiles
-          .filter(({ name }) => name !== action.payload.name )
+        attachedFiles: state.attachedFiles.filter(
+          ({ name }) => name !== action.payload.name
+        )
       }
     }
     case CLEAN_ATTACHED_FILES: {
@@ -75,8 +79,8 @@ const formReducer = (state = initialState, action) => {
         filesError: action.payload.msg
       }
     default:
-      return state;
+      return state
   }
 }
 
-export default formReducer;
+export default formReducer
