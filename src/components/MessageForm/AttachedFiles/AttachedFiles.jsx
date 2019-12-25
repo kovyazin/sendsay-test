@@ -1,15 +1,19 @@
+/* Import libraries */
 import React from "react";
+
+/* Import styles */
+import styles from './AttachedFiles.module.css';
 
 const AttachedFiles = ({ attachedFiles, removeAttachedFile, isSubmitting }) => {
   return (
-    <div className="attached-files">
+    <div className={styles.attachedFiles}>
       {attachedFiles.map(({ name }) => {
         return (
-        <div className="attached-files-item" key={name}>
-          <div className="attached-files-file-name">{name}</div>
+        <div className={styles.file} key={name}>
+          <div className={styles.fileName}>{name}</div>
             <button
               type="button"
-              className="attached-files-btn-delete"
+              className={styles.btnDelete}
               disabled={isSubmitting}
               onClick={() => removeAttachedFile(name)}>
               Удалить

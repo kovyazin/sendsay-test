@@ -1,0 +1,15 @@
+.field {
+  composes: field from '../MessageForm.module.css';
+  padding: 10px;
+  height: 140px;
+
+  resize: none;
+}
+
+.label {
+  composes: label from '../MessageForm.module.css';
+}
+
+.warning {
+  composes: warning from '../MessageForm.module.css';
+}

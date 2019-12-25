@@ -1,0 +1,25 @@
+.field {
+  composes: field from '../MessageForm.module.css';
+  height: 40px;
+}
+
+.field::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.field.left {
+  border-radius: 5px 0 0 5px;
+}
+
+.field.right {
+  border-radius: 0 5px 5px 0;
+  border-left: none;
+}
+
+.label {
+  composes: label from '../MessageForm.module.css';
+}
+
+.warning {
+  composes: warning from '../MessageForm.module.css';
+}

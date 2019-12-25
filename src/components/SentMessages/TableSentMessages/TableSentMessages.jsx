@@ -5,16 +5,16 @@ import React from 'react';
 import SentMessagesItem from './SentMessagesItem/SentMessagesItem';
 
 /* Import styles */
-import './TableSentMessages.css';
+import styles from './TableSentMessages.module.css';
 
 const TableSentMessages = ({ sentMessages }) => {
   return (
-    <table className="sent-messages-table">
+    <table className={styles.table}>
       <thead>
-        <tr className="sent-messages-header">
-          <th className="sent-messages-heading">Дата</th>
-          <th className="sent-messages-heading">Тема</th>
-          <th className="sent-messages-heading">Статус</th>
+        <tr className={styles.header}>
+          <th className={styles.heading}>Дата</th>
+          <th className={styles.heading}>Тема</th>
+          <th className={styles.heading}>Статус</th>
         </tr>
       </thead>
       <tbody>

@@ -1,12 +1,12 @@
 /* Import libraries */
-import React, {Component, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 /* Import action creators */
 import { hideThanksgivingMessage } from '../../actionCreators/thanksgivingMessage';
 
 /* Import styles */
-import './ThanksgivingMessage.css';
+import styles from './ThanksgivingMessage.module.css';
 
 const ThanksgivingMessage = ({ email, hideThanksgivingMessage }) => {
   useEffect(() => {
@@ -15,11 +15,11 @@ const ThanksgivingMessage = ({ email, hideThanksgivingMessage }) => {
   });
 
   return (
-    <div className="thanksgiving-message">
-      <div className="thanksgiving-message-title">
+    <div className={styles.thanksgivingMessage}>
+      <div className={styles.title}>
         Сообщение поставлено в очередь на отправку
       </div>
-      <div className="thanksgiving-message-text">
+      <div className={styles.text}>
         Совсем скоро сообщение вылетит из сервера, и будет двигаться в сторону
         почты получателя «{email}» со скоростью электронов.
       </div>

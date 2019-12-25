@@ -6,9 +6,10 @@ import TextArea from './TextArea/TextArea';
 import TextInput from './TextInput/TextInput';
 import ButtonUploadFile from './ButtonUploadFile/ButtonUploadFile';
 import AttachedFiles from "./AttachedFiles/AttachedFiles";
+import DragndropZone from "./DragndropZone/DragndropZone";
 
 /* Import styles */
-import './MessageForm.css';
+import styles from './MessageForm.module.css';
 
 const MessageFormView = ({
   isSubmitting,
@@ -21,10 +22,10 @@ const MessageFormView = ({
   filesError
 }) => {
   return (
-    <form className="form" onSubmit={handleSubmit} {...getRootProps()} >
-      <div className="form-title">Отправлялка сообщений</div>
-      <div className="form-row">
-        <div className="form-group">
+    <form className={styles.form} onSubmit={handleSubmit} {...getRootProps()} >
+      <div className={styles.title}>Отправлялка сообщений</div>
+      <div className={styles.row}>
+        <div className={styles.group}>
           <TextInput
             label="От кого"
             name="fromName"
@@ -33,7 +34,7 @@ const MessageFormView = ({
             position="left"
             isSubmitting={isSubmitting} />
         </div>
-        <div className="form-group">
+        <div className={styles.group}>
           <TextInput
             name="fromEmail"
             type="text"
@@ -42,8 +43,8 @@ const MessageFormView = ({
             isSubmitting={isSubmitting} />
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-group">
+      <div className={styles.row}>
+        <div className={styles.group}>
           <TextInput
             label="Кому"
             name="toName"
@@ -52,7 +53,7 @@ const MessageFormView = ({
             position="left"
             isSubmitting={isSubmitting} />
         </div>
-        <div className="form-group">
+        <div className={styles.group}>
           <TextInput
             name="toEmail"
             type="text"
@@ -61,8 +62,8 @@ const MessageFormView = ({
             isSubmitting={isSubmitting} />
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-group">
+      <div className={styles.row}>
+        <div className={styles.group}>
           <TextInput
             label="Тема письма"
             name="subject"
@@ -70,8 +71,8 @@ const MessageFormView = ({
             isSubmitting={isSubmitting} />
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-group">
+      <div className={styles.row}>
+        <div className={styles.group}>
           <TextArea
             label="Сообщение"
             name="message"
@@ -86,21 +87,15 @@ const MessageFormView = ({
           <ButtonUploadFile
             getInputProps={getInputProps}
             isSubmitting={isSubmitting} />
-          {filesError && <span className="form-warning">{filesError}</span>}
+          {filesError && <span className={styles.warning}>{filesError}</span>}
         </div>
       </div>
 
-      <button type="submit" className="btn-send" disabled={isSubmitting}>
+      <button type="submit" className={styles.btnSend} disabled={isSubmitting}>
         Отправить
       </button>
 
-      <div className={`dragndrop-zone ${isDragActive ? 'active' : ''}`}>
-        <div className="dragndrop-zone-title">Бросайте файлы сюда, я ловлю</div>
-        <div className="dragndrop-zone-text">
-          Мы принимаем картинки (jpg, png, gif), офисные файлы
-          (doc, xls, pdf) и zip-архивы. Размеры файла до 5 МБ
-        </div>
-      </div>
+      <DragndropZone isDragActive={isDragActive} />
 
     </form>
   );

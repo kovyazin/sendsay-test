@@ -1,0 +1,35 @@
+.table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+
+.header {
+  border-bottom: 1px solid #ddd;
+}
+
+.heading:nth-child(1) {
+  width: 16.22%;
+}
+
+.heading:nth-child(2) {
+  width: 68.92%;
+}
+
+.heading:nth-child(3) {
+  width: 14.86%;
+
+  text-align: right;
+}
+
+.heading {
+  padding-bottom: 9px;
+
+  text-align: left;
+  color: rgba(0, 0, 0, .4);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+}

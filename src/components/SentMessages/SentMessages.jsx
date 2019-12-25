@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import TableSentMessages from './TableSentMessages/TableSentMessages';
 
 /* Import styles */
-import './SentMessages.css';
+import styles from './SentMessages.module.css';
 
 const SentMessages = ({ sentMessages }) => {
   return (
-    <div className="sent-messages">
-      <div className="sent-messages-title">Отправленные сообщения</div>
+    <div className={styles.sentMessages}>
+      <div className={styles.title}>Отправленные сообщения</div>
       {!!sentMessages.length && (
         <TableSentMessages sentMessages={sentMessages} />
       )}
