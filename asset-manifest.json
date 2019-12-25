@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/sendsay-test/static/css/main.3553538b.chunk.css",
+    "main.js": "/sendsay-test/static/js/main.2554c0cd.chunk.js",
+    "main.js.map": "/sendsay-test/static/js/main.2554c0cd.chunk.js.map",
+    "runtime-main.js": "/sendsay-test/static/js/runtime-main.8e0432d1.js",
+    "runtime-main.js.map": "/sendsay-test/static/js/runtime-main.8e0432d1.js.map",
+    "static/js/2.4fe147b0.chunk.js": "/sendsay-test/static/js/2.4fe147b0.chunk.js",
+    "static/js/2.4fe147b0.chunk.js.map": "/sendsay-test/static/js/2.4fe147b0.chunk.js.map",
+    "index.html": "/sendsay-test/index.html",
+    "precache-manifest.12a5704639707585f5a41feaf6eb2d3b.js": "/sendsay-test/precache-manifest.12a5704639707585f5a41feaf6eb2d3b.js",
+    "service-worker.js": "/sendsay-test/service-worker.js",
+    "static/css/main.3553538b.chunk.css.map": "/sendsay-test/static/css/main.3553538b.chunk.css.map",
+    "static/js/2.4fe147b0.chunk.js.LICENSE": "/sendsay-test/static/js/2.4fe147b0.chunk.js.LICENSE",
+    "static/media/AttachedFiles.module.css": "/sendsay-test/static/media/trash.04c58a03.svg",
+    "static/media/ButtonUploadFile.module.css": "/sendsay-test/static/media/clip.ac8c01c5.svg",
+    "static/media/logo.svg": "/sendsay-test/static/media/logo.54299101.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8e0432d1.js",
+    "static/js/2.4fe147b0.chunk.js",
+    "static/css/main.3553538b.chunk.css",
+    "static/js/main.2554c0cd.chunk.js"
+  ]
+}
