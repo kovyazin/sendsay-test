@@ -1,0 +1,19 @@
+.sentMessages {
+  padding: 0 30px;
+}
+
+.title {
+  margin-bottom: 20px;
+
+  color: #000;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.sent-messages-text-empty {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+}

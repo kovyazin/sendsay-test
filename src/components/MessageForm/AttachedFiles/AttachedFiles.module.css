@@ -1,0 +1,88 @@
+.attachedFiles {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.file {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(50% - 5px);
+  height: 50px;
+  padding-left: 59px;
+  padding-right: 15px;
+
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.file:nth-last-child(n + 3) {
+  margin-bottom: 10px;
+}
+
+.file::before {
+  position: absolute;
+  top: calc(50% - 15px);
+  left: 10px;
+  z-index: 1;
+
+  width: 34px;
+  height: 30px;
+
+  background: url('clip.svg') no-repeat center / contain;
+
+  content: '';
+}
+
+.file:nth-child(odd) {
+  margin-right: 10px;
+}
+
+.fileName {
+  flex: 1;
+  padding-right: 5px;
+
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btnDelete {
+  position: relative;
+
+  padding: 0 0 0 18px;
+
+  color: #ff6666;
+  font-weight: 400;
+  line-height: 20px;
+
+  background: none;
+  border: none;
+  font-size: inherit;
+
+  cursor: pointer;
+}
+
+.btnDelete::before {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: 0;
+  z-index: 1;
+
+  width: 13px;
+  height: 16px;
+
+  background: url('./trash.svg') no-repeat center / contain;
+
+  content: '';
+}

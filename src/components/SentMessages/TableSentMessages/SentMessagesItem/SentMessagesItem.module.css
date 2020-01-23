@@ -1,0 +1,28 @@
+.data {
+  padding: 10px 0 5px;
+
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.data:nth-child(3) {
+  text-align: right;
+}
+
+.success {
+  color: #03a100;
+}
+
+.waiting {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.warning {
+  color: #ff6666;
+}
